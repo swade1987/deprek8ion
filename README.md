@@ -1,4 +1,4 @@
-# Deprek8ion Policies
+# Deprek8ion Policies 🕵️‍
 
 A set of rego policies to monitor Kubernetes APIs deprecations.
 
