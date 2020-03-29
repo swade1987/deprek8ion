@@ -6,13 +6,10 @@ QUAY_PASSWORD?="unknown"
 
 CIRCLE_BUILD_NUM?="unknown"
 VERSION=1.1.$(CIRCLE_BUILD_NUM)
-IMAGE = quay.io/$(QUAY_REPO)/$(APP_NAME)
+IMAGE = quay.io/$(QUAY_REPO)/$(APP_NAME):$(VERSION)
 
 build:
-	clear
-	docker build \
-	--build-arg KUBERNETES_VERSION=$(KUBERNETES_VERSION) \
-	-t $(IMAGE) .
+	docker build -t $(IMAGE) .
 
 login:
 	docker login -u $(QUAY_USERNAME) -p $(QUAY_PASSWORD) quay.io
