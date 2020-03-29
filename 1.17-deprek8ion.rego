@@ -13,19 +13,6 @@ deny[msg] {
   msg := _deny
 }
 
-warn[msg] {
-  input.apiVersion == "v1"
-  input.kind == "List"
-  obj := input.items[_]
-  msg := _warn with input as obj
-}
-
-warn[msg] {
-  input.apiVersion != "v1"
-  input.kind != "List"
-  msg := _warn
-}
-
 # Based on https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.16.md
 
 # PriorityClass resources will no longer be served from scheduling.k8s.io/v1beta1 and scheduling.k8s.io/v1alpha1 in v1.17.
