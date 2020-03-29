@@ -1,0 +1,53 @@
+version: 2
+
+jobs:
+
+  build:
+    docker:
+      - image: docker:18.06.1-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: install dependencies
+          command: apk add --update alpine-sdk
+      - run:
+          name: build docker image
+          command: make build
+
+  publish:
+    docker:
+      - image: docker:18.06.1-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: install dependencies
+          command: apk add --update alpine-sdk
+      - run:
+          name: docker login
+          command: make login
+      - run:
+          name: build docker image
+          command: make build
+      - run:
+          name: push image to quay.io
+          command: make push
+      - run:
+          name: docker logout
+          command: make logout
+
+workflows:
+  version: 2
+  flow:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore:
+                - master
+      - publish:
+          filters:
+            branches:
+              only:
+                - master
