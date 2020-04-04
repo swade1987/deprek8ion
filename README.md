@@ -19,3 +19,8 @@ An example of how to use the docker container can be seen below:
 ```
 docker run --rm --name demo -v $(pwd)/demo:/demo quay.io/swade1987/deprek8ion:1.1.7 conftest test -p /policies /demo/ingress.yaml
 ```
+
+Or directly pipe some resources into the container:
+```
+cat /demo/ingress.yaml | docker run --rm -i quay.io/swade1987/deprek8ion:1.1.7 conftest test -p /policies -
+```
