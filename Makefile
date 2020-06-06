@@ -1,22 +1,32 @@
-APP_NAME=deprek8ion
+#------------------------------------------------------------------
+# Project build information
+#------------------------------------------------------------------
+PROJNAME				:= deprek8ion
 
-QUAY_REPO=swade1987
-QUAY_USERNAME?="swade1987+deprek8ion"
-QUAY_PASSWORD?="unknown"
+GCR_REPO				:= eu.gcr.io/swade1987
+GCLOUD_SERVICE_KEY		?="unknown"
+GCLOUD_SERVICE_EMAIL	:= circle-ci@swade1987.iam.gserviceaccount.com
+GOOGLE_PROJECT_ID		:= swade1987
+GOOGLE_COMPUTE_ZONE		:= europe-west2-a
 
-CIRCLE_BUILD_NUM?="unknown"
-VERSION=1.1.$(CIRCLE_BUILD_NUM)
-IMAGE = quay.io/$(QUAY_REPO)/$(APP_NAME):$(VERSION)
+CIRCLE_BUILD_NUM  		?="unknown"
+VERSION					:= 1.1.$(CIRCLE_BUILD_NUM)
+IMAGE             		:= $(PROJNAME):$(VERSION)
+
+#------------------------------------------------------------------
+# CI targets
+#------------------------------------------------------------------
 
 build:
 	docker build -t $(IMAGE) .
 
-login:
-	docker login -u $(QUAY_USERNAME) -p $(QUAY_PASSWORD) quay.io
+push-to-gcr: configure-gcloud-cli
+	docker tag $(IMAGE) $(GCR_REPO)/$(IMAGE)
+	gcloud docker -- push $(GCR_REPO)/$(IMAGE)
+	docker rmi $(GCR_REPO)/$(IMAGE)
 
-logout:
-	docker logout
-
-push:
-	docker push $(IMAGE)
-	docker rmi $(IMAGE)
+configure-gcloud-cli:
+	echo '$(GCLOUD_SERVICE_KEY)' | base64 --decode > /tmp/gcloud-service-key.json
+	gcloud auth activate-service-account $(GCLOUD_SERVICE_EMAIL) --key-file=/tmp/gcloud-service-key.json
+	gcloud --quiet config set project $(GOOGLE_PROJECT_ID)
+	gcloud --quiet config set compute/zone $(GOOGLE_COMPUTE_ZONE)
