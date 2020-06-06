@@ -17,11 +17,11 @@ Image tags can be found at [https://eu.gcr.io/swade1987/deprek8ion](https://eu.g
 An example of how to use the docker container can be seen below:
 
 ```sh
-docker run --rm --name demo -v $(pwd)/demo:/demo eu.gcr.io/swade1987/deprek8ion:1.1.7 /demo/ingress.yaml
+docker run --rm --name demo -v $(pwd)/demo:/demo eu.gcr.io/swade1987/deprek8ion:1.1.17 /demo/ingress.yaml
 ```
 
 Or directly pipe some resources into the container:
 
 ```sh
-cat ./demo/ingress.yaml | docker run --rm -i eu.gcr.io/swade1987/deprek8ion:1.1.7 -
+cat ./demo/ingress.yaml | docker run --rm -i eu.gcr.io/swade1987/deprek8ion:1.1.17 -
 ```
