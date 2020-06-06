@@ -1,17 +1,17 @@
 #------------------------------------------------------------------
 # Project build information
 #------------------------------------------------------------------
-PROJNAME				:= deprek8ion
+PROJNAME 							:= deprek8ion
 
-GCR_REPO				:= eu.gcr.io/swade1987
-GCLOUD_SERVICE_KEY		?="unknown"
-GCLOUD_SERVICE_EMAIL	:= circle-ci@swade1987.iam.gserviceaccount.com
-GOOGLE_PROJECT_ID		:= swade1987
-GOOGLE_COMPUTE_ZONE		:= europe-west2-a
+GCR_REPO 							:= eu.gcr.io/swade1987
+GCLOUD_SERVICE_KEY 		?="unknown"
+GCLOUD_SERVICE_EMAIL 	:= circle-ci@swade1987.iam.gserviceaccount.com
+GOOGLE_PROJECT_ID 		:= swade1987
+GOOGLE_COMPUTE_ZONE 	:= europe-west2-a
 
-CIRCLE_BUILD_NUM  		?="unknown"
-VERSION					:= 1.1.$(CIRCLE_BUILD_NUM)
-IMAGE             		:= $(PROJNAME):$(VERSION)
+CIRCLE_BUILD_NUM 			?="unknown"
+VERSION 							:= 1.1.$(CIRCLE_BUILD_NUM)
+IMAGE 								:= $(PROJNAME):$(VERSION)
 
 #------------------------------------------------------------------
 # CI targets
