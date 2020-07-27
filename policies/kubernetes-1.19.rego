@@ -16,14 +16,6 @@ warn[msg] {
 # Based on https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.16.md
 # Based on https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.19.md
 
-# The admissionregistration.k8s.io/v1beta1 versions of MutatingWebhookConfiguration and ValidatingWebhookConfiguration are deprecated in 1.19. Migrate to use admissionregistration.k8s.io/v1 instead
-_warn = msg {
-  kinds := ["MutatingWebhookConfiguration", "ValidatingWebhookConfiguration"]
-  input.apiVersion == "admissionregistration.k8s.io/v1beta1"
-  input.kind == kinds[_]
-  msg := sprintf("%s/%s: API admissionregistration.k8s.io/v1beta1 is deprecated in Kubernetes 1.19, use admissionregistration.k8s.io/v1 instead.", [input.kind, input.metadata.name])
-}
-
 # The apiextensions.k8s.io/v1beta1 version of CustomResourceDefinition is deprecated in 1.19. Migrate to use apiextensions.k8s.io/v1 instead
 _warn = msg {
   input.apiVersion == "apiextensions.k8s.io/v1beta1"
