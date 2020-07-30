@@ -1,0 +1,46 @@
+version: 0.1.0
+name: deprek8ion
+displayName: Deprek8ion
+createdAt: 2020-07-27T18:00:00Z
+description: A set of rego policies to monitor Kubernetes APIs deprecations
+license: MIT
+homeURL: https://github.com/swade1987/deprek8ion
+containerImage: eu.gcr.io/swade1987/deprek8ion:1.1.17
+keywords:
+  - monitoring
+  - kubernetes
+  - deprecations
+  - policies
+  - opa
+links:
+  - name: source
+    url: https://github.com/swade1987/deprek8ion/tree/master/policies
+readme: |
+  # Deprek8ion 🕵️‍
+
+  A set of rego policies to monitor Kubernetes APIs deprecations.
+
+  The Kubernetes API deprecations can be found using <https://relnotes.k8s.io/?markdown=deprecated>.
+
+  ## Docker image
+
+  The docker container contains the most recent version of [conftest](https://github.com/instrumenta/conftest) as well as the policies at `/policies`.
+
+  Image tags can be found at [https://eu.gcr.io/swade1987/deprek8ion](https://eu.gcr.io/swade1987/deprek8ion)
+
+  ## Example usage
+
+  An example of how to use the docker container can be seen below:
+
+  ```sh
+  docker run --rm --name demo -v $(pwd)/demo:/demo eu.gcr.io/swade1987/deprek8ion:1.1.17 /demo/ingress.yaml
+  ```
+
+  Or directly pipe some resources into the container:
+
+  ```sh
+  cat ./demo/ingress.yaml | docker run --rm -i eu.gcr.io/swade1987/deprek8ion:1.1.17 -
+  ```
+maintainers:
+  - name: Steven Wade
+    email: steven@stevenwade.co.uk
