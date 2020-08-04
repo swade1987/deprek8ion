@@ -12,6 +12,10 @@ The docker container contains the most recent version of [conftest](https://gith
 
 Image tags can be found at [https://eu.gcr.io/swade1987/deprek8ion](https://eu.gcr.io/swade1987/deprek8ion)
 
+## Artifact Hub
+
+The policies are also available at [https://artifacthub.io/packages/opa/deprek8ion/deprek8ion](https://artifacthub.io/packages/opa/deprek8ion/deprek8ion).
+
 ## Example usage
 
 An example of how to use the docker container can be seen below:
