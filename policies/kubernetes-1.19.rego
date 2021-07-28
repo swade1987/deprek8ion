@@ -64,3 +64,10 @@ _warn = msg {
   input.kind == "Ingress"
   msg := sprintf("%s/%s: API extensions/v1beta1 for Ingress is deprecated from Kubernetes 1.19, use networking.k8s.io/v1 instead.", [input.kind, input.metadata.name])
 }
+
+# Ingress resources will no longer be served from networking.k8s.io/v1beta1 in v1.19. Migrate use to the networking.k8s.io/v1 API, available since v1.14.
+_warn = msg {
+  input.apiVersion == "networking.k8s.io/v1beta1"
+  input.kind == "Ingress"
+  msg := sprintf("%s/%s: API networking.k8s.io/v1beta1 for Ingress is deprecated from Kubernetes 1.19, use networking.k8s.io/v1 instead.", [input.kind, input.metadata.name])
+}
